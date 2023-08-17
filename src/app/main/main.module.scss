@@ -1,0 +1,35 @@
+@import "styles/main.scss";
+
+.main {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  height: 100vh;
+}
+
+.commentsSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(40, 40, 40);
+  min-width: 25%;
+  height: 100vh;
+}
+
+.chatSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: $backgroundColor;
+}
+
+.chatHeader {
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  width: 25%;
+}

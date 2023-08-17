@@ -1,0 +1,51 @@
+@import "styles/main.scss";
+
+.sentContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.sentText {
+  display: flex;
+  color: white;
+  background-color: rgb(40, 40, 40);
+  padding: $smallSpace $mediumSpace $smallSpace $mediumSpace;
+  margin: 10px;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.receivedContainer {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.receivedText {
+  background-color: rgb(113, 110, 115);
+  padding: $smallSpace $mediumSpace $smallSpace $mediumSpace;
+  color: white;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  position: relative;
+}
+
+.initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: $darkColor;
+  color: $fontColor;
+  font-weight: bold;
+}
