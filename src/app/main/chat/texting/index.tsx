@@ -11,17 +11,19 @@ export default function Texting() {
   };
 
   return (
-   <div className={styles.inputContainer}>
-    <input
-      type="text"
-      className={styles.textInput}
-      placeholder="Enter text"
-      value={inputValue}
-      onChange={(e) => setInputValue(e.target.value)}
-    />
-    <button className={styles.submitButton} onClick={handleButtonClick}>
-      Submit
-    </button>
-  </div>
+    <div className={styles.container}> 
+      <div className={styles.inputContainer}>
+        <input
+          type="text"
+          className={styles.textInput}
+          placeholder="Enter text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button className={styles.submitButton} onClick={handleButtonClick}>
+          Submit
+        </button>
+      </div>
+    </div>
   )
 }

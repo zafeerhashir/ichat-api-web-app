@@ -9,8 +9,8 @@ export default function List() {
   return (
     <div className={styles.container}>
       <Header/>
-      <ConversationList/>
-      <Texting/>
+       <ConversationList/>
+      <Texting/> 
     </div>
   )
 }

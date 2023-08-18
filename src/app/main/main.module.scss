@@ -7,13 +7,13 @@
   height: 100vh;
 }
 
-.commentsSection {
+.conversationSection {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  background-color: rgb(40, 40, 40);
-  min-width: 25%;
-  height: 100vh;
+  width: 32%;
+  height: 100%;
 }
 
 .chatSection {
@@ -22,11 +22,10 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  background-color: $backgroundColor;
 }
 
 .chatHeader {
-  color: white;
+  color: $fontColor;
   font-size: x-large;
   font-weight: bold;
   margin-bottom: 10px;

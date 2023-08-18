@@ -3,31 +3,34 @@
 .sentContainer {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 80%;
 }
 
 .sentText {
   display: flex;
-  color: white;
   background-color: rgb(40, 40, 40);
   padding: $smallSpace $mediumSpace $smallSpace $mediumSpace;
-  margin: 10px;
+  color: $fontColor;
   border-radius: 5px;
   width: fit-content;
+  height: fit-content;
 }
 
 .receivedContainer {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: 80%;
 }
 
 .receivedText {
-  background-color: rgb(113, 110, 115);
+  display: flex;
+  justify-content: flex-end;
   padding: $smallSpace $mediumSpace $smallSpace $mediumSpace;
-  color: white;
+  background-color: rgb(113, 110, 115);
+  color: $fontColor;
   border-radius: 5px;
   width: fit-content;
+  height: fit-content;
 }
 
 .avatar {

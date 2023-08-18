@@ -10,6 +10,14 @@
   width: 80%;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  width: 100%;
+}
+
 .textInput {
   border: none;
   padding: 10px;

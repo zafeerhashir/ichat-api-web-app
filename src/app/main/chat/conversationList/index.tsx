@@ -2,11 +2,13 @@
 import useSWR,  { SWRResponse } from 'swr'
 import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import React, { Suspense } from 'react'
+import React, { Suspense, useContext } from 'react'
 import { baseUrl, message } from '@/app/core/endpoints';
 import Message  from './message';
 import { Message as MessageType } from './types'
 import styles from './list.module.css'
+import { AppContext } from '@/app/core/Providers/context';
+import { Conversation } from '../../conversations/types';
 
 
 const fetcher = async (...args: Parameters<typeof fetch>): Promise<MessageType[]> => {
@@ -16,8 +18,9 @@ const fetcher = async (...args: Parameters<typeof fetch>): Promise<MessageType[]
 }
 
 export default function ConversationList() {
-  const recepientID = '647efd74476d3902be5818ef';
-  const{ data, error }: SWRResponse<MessageType[], Error> = useSWR( `${baseUrl}${message}/${recepientID}`, fetcher, { suspense: true })
+  const { conversation = {} as Conversation } = useContext(AppContext);
+  const { _id } = conversation;
+  const{ data, error }: SWRResponse<MessageType[], Error> = useSWR( `${baseUrl}${message}/${_id}`, fetcher, { suspense: true })
   return (
     <div className={styles.container}>
       <Suspense fallback={<div>loading...</div>}>
@@ -32,7 +35,7 @@ export default function ConversationList() {
               width={width}
             >
               {({ index, style }) => (
-              <div style={{ ...style }} >
+              <div style={{ ...style }} className={styles.itemContainer} >
                   <Message item={data[index]}/>
               </div>
               )}

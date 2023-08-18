@@ -1,33 +1,37 @@
 "use client";
-
-import React from "react";
+import React, { useContext } from "react";
 import { Conversation } from "../types";
-import styles from "./card.module.css";
+import styles from "./card.module.scss";
 import * as constants from "../constants";
-import { formatMonthYear } from "../utils";
+import { formatMonthYear, formatUsername, getInitials } from "@/app/core/utilts";
+import { AppContext } from "@/app/core/Providers/context";
 
 type Props = {
   conversation: Conversation;
 };
 
-export default function index(props: Props) {
-  alert('ds')
+export default function Index(props: Props) {
+  const { setConversation } = useContext(AppContext);
   const { conversation } = props;
   const { users, messages } = conversation;
   const [user] = users;
   const { username } = user;
   const [message] = messages;
   const { text, createdAt } = message;
-  const usernameInitialLetters = `${username.charAt(0)}${username.charAt(1)}`;
   const formattedMessage = `${constants.prefix}${text}`;
 
+
+  const onClick = () => {
+    setConversation(conversation)
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={onClick}>
       <div className={styles.avatarContainer}>
-        <div className={styles.avatar}>{usernameInitialLetters}</div>
+        <div className={styles.avatar}>{getInitials(username)}</div>
       </div>
       <div className={styles.info}>
-        <div className={styles.name}>{username} </div>
+        <div className={styles.name}>{formatUsername(username)} </div>
         <div className={styles.lastMessage}>{formattedMessage} </div>
       </div>
       <div className={styles.date}>{formatMonthYear(createdAt)}</div>

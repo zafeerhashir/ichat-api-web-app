@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext } from 'react'
 import styles from './msg.module.scss'
 import { AppContext } from '@/app/core/Providers/context';
@@ -22,9 +24,6 @@ export default function Msg(props: Props) {
     if(messageSent) {
       return (
           <div className={styles.sentContainer}>
-              <div className={styles.avatar}>
-                <div className={styles.initials}>{getInitials(username as string)}</div>
-              </div>
             <div className={styles.sentText}>
               {text}
             </div>
@@ -32,11 +31,11 @@ export default function Msg(props: Props) {
       )
     }
     return (
-      <div className={styles.receivedContainer}>
-        <div className={styles.receivedText}>
-          {text}
+        <div className={styles.receivedContainer}>
+          <div className={styles.receivedText}>
+            {text}
+          </div>
         </div>
-      </div>
     )
   }
 

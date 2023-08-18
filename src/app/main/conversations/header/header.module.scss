@@ -1,0 +1,14 @@
+@import "styles/main.scss";
+
+.container {
+  display: flex;
+  align-items: center;
+  padding-left: $mediumSpace;
+  height: 10vh;
+  width: 100%;
+  background-color: $backgroundColor;
+  box-shadow: 0 2px 4px $darkColor;
+  font-weight: bold;
+  color: $fontColor;
+  font-size: 1.5rem;
+}
