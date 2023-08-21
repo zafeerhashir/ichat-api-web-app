@@ -18,8 +18,8 @@ export interface User {
 export interface Message {
   _id: string
   conversation: string
-  from: string
-  to: string
+  from: User
+  to: User
   text: string
   createdAt: string
   __v: number

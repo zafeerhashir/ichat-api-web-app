@@ -18,25 +18,33 @@ const fetcher = async (...args: Parameters<typeof fetch>): Promise<MessageType[]
 }
 
 export default function ConversationList() {
-  const { conversation = {} as Conversation } = useContext(AppContext);
+  const { conversation = {} as Conversation, setMessages, messages } = useContext(AppContext);
   const { _id } = conversation;
   const{ data, error }: SWRResponse<MessageType[], Error> = useSWR( `${baseUrl}${message}/${_id}`, fetcher, { suspense: true })
+  
+  React.useEffect(() => {
+    if(data?.length)
+    {
+      setMessages(data)
+    }
+  },[_id])
+
   return (
     <div className={styles.container}>
       <Suspense fallback={<div>loading...</div>}>
-        {data &&
+        {messages &&
           <AutoSizer>
           {({ height, width }) => (
             <List
               className="List"
               height={height}
               itemSize={100}
-              itemCount={data.length}
+              itemCount={messages.length}
               width={width}
             >
               {({ index, style }) => (
               <div style={{ ...style }} className={styles.itemContainer} >
-                  <Message item={data[index]}/>
+                  <Message item={messages[index]}/>
               </div>
               )}
             </List>

@@ -13,9 +13,10 @@ type Props = {
 export default function Index(props: Props) {
   const { setConversation } = useContext(AppContext);
   const { conversation } = props;
+  if(!conversation) return;
   const { users, messages } = conversation;
-  const [user] = users;
-  const { username } = user;
+  const [_ ,recipientUser] = users;
+  const { username } = recipientUser;
   const [message] = messages;
   const { text, createdAt } = message;
   const formattedMessage = `${constants.prefix}${text}`;

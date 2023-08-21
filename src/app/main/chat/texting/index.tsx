@@ -1,13 +1,27 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './texting.module.css'
+import { io } from 'socket.io-client';
+import events from '@/app/core/events';
+import useSocket from '@/app/core/Hooks/useSockets';
+import { AppContext } from '@/app/core/Providers/context';
+import { Conversation, User } from '../../conversations/types';
+
 
 export default function Texting() {
   const [inputValue, setInputValue] = useState('');
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const { conversation = {} as Conversation } = useContext(AppContext)
+  const { sentMessage } = useSocket();
 
   const handleButtonClick = () => {
-    setButtonClicked(true);
+    if(inputValue && conversation){
+      const { users = [] } = conversation;
+      const [ fromUser = {} as User, toUser = {} as User] = users
+      const { _id: loggedInUserId } = fromUser;
+      const { _id: recipientUserId} = toUser;
+      sentMessage(loggedInUserId, recipientUserId, inputValue)
+    }
+    setInputValue('')
   };
 
   return (
