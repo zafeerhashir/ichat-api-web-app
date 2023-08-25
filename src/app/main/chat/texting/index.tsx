@@ -17,10 +17,10 @@ export default function Texting() {
   const recipientUser = useMemo(() => getRecipientUser(users, user), [conversation])
 
 
-  const updateMessageList = ( ) => {
+  const updateMessageList = (loggedInUserId:string, recipientUserId: string) => {
     if(messages && messages.length > 0){
       const [ item ] = messages
-      const updatedMessages = [...messages, { ...item, text } as Message ] 
+      const updatedMessages = [...messages, { ...item, from: { _id: loggedInUserId }, to: { _id: recipientUserId} , text } as Message ] 
       setMessages(updatedMessages); 
     }
   }
@@ -30,7 +30,7 @@ export default function Texting() {
       const { _id: loggedInUserId } = user;
       const { _id: recipientUserId} = recipientUser as User;
       sentMessage(loggedInUserId, recipientUserId, text)
-      updateMessageList();
+      updateMessageList(loggedInUserId, recipientUserId);
     }
     setText('')
   };

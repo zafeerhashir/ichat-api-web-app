@@ -16,10 +16,10 @@ export default function Msg(props: Props) {
   const { user } = useContext(AppContext);
 
   if (item && user) {
-    const { text, from, to } = item;
+    const { text, from } = item;
     const { _id: fromUserId } = from;
-    const { _id: userId, username } = user;
-    const messageSent = fromUserId === userId;
+    const { _id: loggedInUserId } = user;
+    const messageSent = fromUserId === loggedInUserId;
   
     if(messageSent) {
       return (
