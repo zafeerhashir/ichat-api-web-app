@@ -13,27 +13,19 @@ const useSocket = () => {
 
 
   useEffect(() => {
-
-      socket.on('connect_error', (error) => {
-    console.error('Socket connection error:', error);
-  });
-
-  const privateMessageHandler = (fromUser: string, toUser: string, text: string) => {
-    if(messages && messages.length > 0){
-      const [ item ] = messages
-      const updatedMessages = [...messages, { ...item, text}] 
-      setMessages(updatedMessages); 
-    }
-  }
-
-  socket.on(events.PRIVATE_MESSAGE, privateMessageHandler)
-
     return () => {
       socket.disconnect();
     };
   }, [socket]);
 
-
+  const privateMessageHandler = (fromUser: string, toUser: string, text: string) => {
+    if(messages && messages.length > 0){
+      const [ item ] = messages
+      const updatedMessages = [...messages, { ...item, from: { _id: fromUser }, to: { _id: toUser }, text } as Message ] 
+      setMessages(updatedMessages); 
+    }
+  }
+  socket.on(events.PRIVATE_MESSAGE, privateMessageHandler)
 
   const online = (loggedInUserId: string) => {
     socket.emit(events.USER_ONLINE, loggedInUserId);

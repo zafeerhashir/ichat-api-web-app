@@ -1,19 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import styles from './header.module.scss'
 import { AppContext } from '@/app/core/Providers/context';
 import { formatUsername, getInitials } from '@/app/core/utilts';
-import { User } from '../../conversations/types';
+import { Conversation, User } from '../../conversations/types';
+import { getRecipientUser } from '../utils';
 
 export default function Header() {
-  const { user } = useContext(AppContext);
-  const { username } = user as User;
+  const { conversation = {} as Conversation, user = {} as User }  = useContext(AppContext)
+  const { users = [] } = conversation
+  const recipientUser = useMemo(() => getRecipientUser(users, user), [conversation])
 
   return (
     <div className={styles.header}>
     <div className={styles.avatar}>
-      <div className={styles.initials}>{getInitials(username as string)}</div>
+      { recipientUser &&
+      <div className={styles.initials}>{getInitials(recipientUser.username as string)}</div>
+      }
     </div>
-    <div className={styles.name}>{formatUsername(username as string)}</div>
+    { recipientUser &&
+     <div className={styles.name}>{formatUsername(recipientUser.username as string)}</div>
+    }
   </div>
   )
 }

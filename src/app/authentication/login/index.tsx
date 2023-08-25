@@ -12,7 +12,7 @@ const postFetcher = async (url: string, options: RequestInit): Promise<User> => 
 }
 
 export default function Index() {
-  const { setUser, setAuthenticated } = useContext(AppContext);
+  const { setUser } = useContext(AppContext);
   const [username, setUsername] = useState<string>('');
 
   const loggedInUser = async () => {
@@ -32,7 +32,6 @@ export default function Index() {
       const user = await postFetcher(url, options);
       if(user){
         setUser(user);
-        setAuthenticated(true);
       }
     } catch (error) {
       console.error('Error fetching data:', error);

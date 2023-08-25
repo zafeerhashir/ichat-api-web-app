@@ -1,27 +1,38 @@
 "use client"
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useMemo } from 'react'
 import styles from './texting.module.css'
 import { io } from 'socket.io-client';
 import events from '@/app/core/events';
 import useSocket from '@/app/core/Hooks/useSockets';
 import { AppContext } from '@/app/core/Providers/context';
-import { Conversation, User } from '../../conversations/types';
+import { Conversation, Message, User } from '../../conversations/types';
+import { getRecipientUser } from '../utils';
 
 
 export default function Texting() {
-  const [inputValue, setInputValue] = useState('');
-  const { conversation = {} as Conversation } = useContext(AppContext)
+  const [text, setText] = useState('');
+  const { conversation = {} as Conversation, setMessages, messages, user = {} as User } = useContext(AppContext)
   const { sentMessage } = useSocket();
+  const { users = [] } = conversation;
+  const recipientUser = useMemo(() => getRecipientUser(users, user), [conversation])
+
+
+  const updateMessageList = ( ) => {
+    if(messages && messages.length > 0){
+      const [ item ] = messages
+      const updatedMessages = [...messages, { ...item, text } as Message ] 
+      setMessages(updatedMessages); 
+    }
+  }
 
   const handleButtonClick = () => {
-    if(inputValue && conversation){
-      const { users = [] } = conversation;
-      const [ fromUser = {} as User, toUser = {} as User] = users
-      const { _id: loggedInUserId } = fromUser;
-      const { _id: recipientUserId} = toUser;
-      sentMessage(loggedInUserId, recipientUserId, inputValue)
+    if(text && recipientUser && user){
+      const { _id: loggedInUserId } = user;
+      const { _id: recipientUserId} = recipientUser as User;
+      sentMessage(loggedInUserId, recipientUserId, text)
+      updateMessageList();
     }
-    setInputValue('')
+    setText('')
   };
 
   return (
@@ -31,8 +42,8 @@ export default function Texting() {
           type="text"
           className={styles.textInput}
           placeholder="Enter text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         />
         <button className={styles.submitButton} onClick={handleButtonClick}>
           Submit

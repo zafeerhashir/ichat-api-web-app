@@ -1,3 +1,4 @@
+import { User } from "./types";
 
 export const formatMonthYear = (date: string) => {
   const formattedDate = new Date(date).toLocaleDateString();
