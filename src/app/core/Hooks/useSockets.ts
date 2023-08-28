@@ -27,7 +27,7 @@ const useSocket = () => {
   }
   socket.on(events.PRIVATE_MESSAGE, privateMessageHandler)
 
-  const online = (loggedInUserId: string) => {
+  const setUserOnline = (loggedInUserId: string) => {
     socket.emit(events.USER_ONLINE, loggedInUserId);
   };
 
@@ -36,7 +36,7 @@ const useSocket = () => {
   };
 
 
-  return { online, sentMessage };
+  return { setUserOnline, sentMessage };
 };
 
 export default useSocket;

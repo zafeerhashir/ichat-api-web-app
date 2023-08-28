@@ -12,9 +12,9 @@ import { User } from "./conversations/types";
 
 export default function Main() {
   const { user = {} as User } = useContext(AppContext);
-  const { online } = useSocket();
+  const { setUserOnline } = useSocket();
   const { _id } = user;
-  online(_id);
+  setUserOnline(_id);
 
   return (
     <div className={styles.main}>
