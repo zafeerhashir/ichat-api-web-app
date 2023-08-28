@@ -37,4 +37,4 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_VICTORIOUS_FLOWER_047E22110 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "../next"  # Adjust the output directory based on your Next.js config
+          app_location: "../../.next"  # Adjust the output directory based on your Next.js config
