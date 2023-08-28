@@ -28,7 +28,7 @@ jobs:
           npm run test --if-present
 
       - name: Zip all files for upload between jobs
-        run: zip next.zip ./* .next .env -qr
+        run: zip next.zip ./* .next -qr
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -41,7 +41,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: $
 
     steps:
       - name: Download artifact from build job
@@ -55,7 +55,7 @@ jobs:
         with:
           app-name: 'zhchatapp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E85B7E36E8E34C20A23BD24A35F85446 }}
+          publish-profile: $
           package: next.zip
 
       - name: Delete zip file
