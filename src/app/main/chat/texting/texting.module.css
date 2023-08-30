@@ -27,6 +27,10 @@
   outline: none;
 }
 
+.textInput[type="text"]:focus {
+  color: black;
+}
+
 .submitButton {
   border: none;
   background-color:rgb(40, 40, 40);
