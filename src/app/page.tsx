@@ -6,7 +6,7 @@ import Main from './main/main'
 import Link from 'next/link';
 import Login from './authentication/login';
 import { useContext } from 'react';
-import { AppContext } from './core/Providers/context';
+import { AppContext } from './core/Providers/AppContext';
 
 export default function Routes() {
   const { authenticated } = useContext(AppContext);

@@ -2,14 +2,15 @@
 import useSWR,  { SWRResponse } from 'swr'
 import { FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-import React, { Suspense, useContext, useRef, useState } from 'react'
+import React, { Suspense, useContext, useRef } from 'react'
 import { baseUrl, message } from '@/app/core/endpoints';
-import Message  from './message';
 import { Message as MessageType } from './types'
 import styles from './list.module.css'
-import { AppContext } from '@/app/core/Providers/context';
+import { AppContext } from '@/app/core/Providers/AppContext';
 import { Conversation } from '../../conversations/types';
-
+import useSocket from '@/app/core/Hooks/useSockets';
+import events from '@/app/core/events';
+import Message from './message';
 
 const fetcher = async (...args: Parameters<typeof fetch>): Promise<MessageType[]> => {
   const response = await fetch(...args);
@@ -21,7 +22,21 @@ export default function ConversationList() {
   const { conversation = {} as Conversation, setMessages, messages = [] } = useContext(AppContext);
   const listRef = useRef<List>(null);
   const { _id } = conversation;
-  const{ data, error }: SWRResponse<MessageType[], Error> = useSWR( `${baseUrl}${message}/${_id}`, fetcher, { suspense: true })
+  const{ data }: SWRResponse<MessageType[], Error> = useSWR( `${baseUrl}${message}/${_id}`, fetcher, { suspense: true })
+  const sockets = useSocket();
+
+  const updateMessagesOnPrivateMessage = (fromUser: string, toUser: string, text: string) => {
+      if (messages && messages.length > 0) {
+        const [item] = messages;
+        const updatedMessages = [
+          ...messages,
+          { ...item, from: { _id: fromUser }, to: { _id: toUser }, text } as MessageType,
+        ];
+        setMessages(updatedMessages);
+      }
+  };
+  
+  sockets.subscribe(events.PRIVATE_MESSAGE, updateMessagesOnPrivateMessage);
   
   React.useEffect(() => {
     if(data?.length)
@@ -30,7 +45,6 @@ export default function ConversationList() {
     }
   },[_id])
 
-    // Scroll to bottom whenever data changes
     React.useEffect(() => {
       if (messages) {
         scrollToBottom();

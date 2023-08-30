@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useContext } from 'react';
 import styles from './login.module.scss';
-import { AppContext } from '@/app/core/Providers/context';
+import { AppContext } from '@/app/core/Providers/AppContext';
 import { User } from '@/app/core/Providers/types';
 import { baseUrl, login } from '@/app/core/endpoints';
 

@@ -1,5 +1,5 @@
 "use client"
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode } from 'react';
 import { User } from './types';
 import { Message } from '@/app/main/chat/conversationList/types';
 import { Conversation } from '@/app/main/conversations/types';  
@@ -34,20 +34,22 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   },[user])
 
+  const contextValue: ContextType = {
+    authenticated,
+    setAuthenticated,
+    user,
+    setUser,
+    messages,
+    setMessages,
+    conversations,
+    setConversations,
+    conversation,
+    setConversation,
+  };
+
   return (  
       <AppContext.Provider 
-        value={{ 
-          authenticated,
-          setAuthenticated,
-          user,
-          setUser,
-          messages,
-          setMessages,
-          conversations,
-          setConversations,
-          conversation,
-          setConversation,
-          }}>
+        value={contextValue}>
         {children}
       </AppContext.Provider>
   );

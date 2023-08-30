@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import styles from './msg.module.scss'
-import { AppContext } from '@/app/core/Providers/context';
+import { AppContext } from '@/app/core/Providers/AppContext';
 import { Message } from '../types';
 import { getInitials } from '@/app/core/utilts';
 

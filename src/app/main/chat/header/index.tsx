@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react'
 import styles from './header.module.scss'
-import { AppContext } from '@/app/core/Providers/context';
+import { AppContext } from '@/app/core/Providers/AppContext';
 import { formatUsername, getInitials } from '@/app/core/utilts';
 import { Conversation, User } from '../../conversations/types';
 import { getRecipientUser } from '../utils';

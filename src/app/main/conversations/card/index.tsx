@@ -4,7 +4,7 @@ import { Conversation, User } from "../types";
 import styles from "./card.module.scss";
 import * as constants from "../constants";
 import { formatMonthYear, formatUsername, getInitials } from "@/app/core/utilts";
-import { AppContext } from "@/app/core/Providers/context";
+import { AppContext } from "@/app/core/Providers/AppContext";
 import { getRecipientUser } from "../../chat/utils";
 
 type Props = {
@@ -18,7 +18,6 @@ export default function Index(props: Props) {
   const recipientUser = useMemo(() => getRecipientUser(users, user), [conversation])
   const { username } = recipientUser as User;
   const [message] = messages;
-  console.log(messages, "Messages")
 
   const { text, createdAt } = message;
   const formattedMessage = `${constants.prefix}${text}`;

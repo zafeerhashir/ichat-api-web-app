@@ -7,7 +7,7 @@ import { baseUrl, conversation } from '@/app/core/endpoints';
 import Card from '../card';
 import { Conversation } from '../types';
 import styles from './list.module.scss'
-import { AppContext } from '@/app/core/Providers/context';
+import { AppContext } from '@/app/core/Providers/AppContext';
 import { User } from '@/app/core/Providers/types';
 
 const fetcher = async (...args: Parameters<typeof fetch>): Promise<Conversation[]> => {

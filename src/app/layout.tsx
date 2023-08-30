@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { AppProvider } from './core/Providers/context'
+import { SocketProvider } from './core/Providers/SocketContext'
+import { AppProvider } from './core/Providers/AppContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,10 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>    
-        <AppProvider>
-            {children}  
-        </AppProvider>
+      <body>
+        <SocketProvider>
+          <AppProvider>
+              {children}  
+          </AppProvider>
+        </SocketProvider>
       </body>
     </html>
   )
