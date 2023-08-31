@@ -17,11 +17,13 @@ export default function Texting() {
   const recipientUser = useMemo(() => getRecipientUser(users, user), [conversation])
 
   useEffect(() => {
-    if(typing){
-      sockets.emit(events.USER_TYPING, true);
+    if(typing && recipientUser){
+      const { _id: recipientUserId} = recipientUser
+      sockets.emit(events.USER_TYPING,recipientUserId ,true);
     }
-    else {
-      sockets.emit(events.USER_TYPING, false);
+    else if(!typing && recipientUser){
+      const { _id: recipientUserId} = recipientUser
+      sockets.emit(events.USER_TYPING,recipientUserId ,false);
     }
   }, [typing]);
 
