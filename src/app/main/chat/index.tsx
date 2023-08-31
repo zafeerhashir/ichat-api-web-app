@@ -2,14 +2,16 @@
 import React from 'react'
 import Texting from './texting';
 import ConversationList from './conversationList';
-import styles from './chat.module.css'
 import Header from './header';
+import UserTyping from './conversationList/userTyping';
+import styles from './chat.module.scss'
 
 export default function List() {
   return (
     <div className={styles.container}>
       <Header/>
        <ConversationList/>
+       <UserTyping/>      
       <Texting/> 
     </div>
   )
