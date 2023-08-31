@@ -6,6 +6,7 @@ import events from '@/app/core/events';
 export default function UserTyping() {
   const sockets = useSocket();
   const [typing, setTyping] = useState(false);
+  
   const updateMessagesOnPrivateMessage = (typing: string) => {
     setTyping(!!typing)
   };
