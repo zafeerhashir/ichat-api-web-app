@@ -55,10 +55,13 @@ export default function Index() {
         <input
           type="text"
           placeholder="Username"
+          className={styles.input}
           value={username}
           onChange={handleUsernameChange}
         />
-        <button onClick={handleLogin}>Login</button>
+        <button 
+          className={styles.button}
+          onClick={handleLogin}>Login</button>
       </div>
     </div>
   );

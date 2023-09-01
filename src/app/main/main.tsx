@@ -1,9 +1,7 @@
 "use client";
-
 import React, { useContext, useEffect } from "react";
 import Conversations from "./conversations";
 import styles from "./main.module.scss";
-import { baseUrl, conversation } from "@/app/core/endpoints";
 import Chat from "./chat";
 import useSocket from "@/app/core/Hooks/useSockets";
 import events from '@/app/core/events';

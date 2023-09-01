@@ -10,6 +10,7 @@ export default function UserTyping() {
   const updateMessagesOnPrivateMessage = (typing: string) => {
     setTyping(!!typing)
   };
+  
   sockets.subscribe(events.USER_TYPING, updateMessagesOnPrivateMessage);
 
   if(typing){

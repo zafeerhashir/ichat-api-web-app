@@ -5,7 +5,7 @@ import events from '@/app/core/events';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Conversation, Message, User } from '../../conversations/types';
 import { getRecipientUser } from '../utils';
-import styles from './texting.module.css';
+import styles from './texting.module.scss';
 
 
 export default function Texting() {
