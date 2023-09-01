@@ -28,7 +28,7 @@
 }
 
 .textInput[type="text"]:focus {
-  color: black;
+  color: $inputFontColor;
 }
 
 .submitButton {

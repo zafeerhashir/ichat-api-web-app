@@ -26,6 +26,10 @@
   }
 }
 
+.textInput[type="text"]:focus {
+  color: $inputFontColor;
+}
+
 @media (max-width: 767px) {
   .loginContainer {
     width: 80vw;
