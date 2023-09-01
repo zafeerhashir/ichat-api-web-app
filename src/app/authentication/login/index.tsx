@@ -55,7 +55,7 @@ export default function Index() {
         <input
           type="text"
           placeholder="Username"
-          className={styles.input}
+          className={styles.textInput}
           value={username}
           onChange={handleUsernameChange}
         />
