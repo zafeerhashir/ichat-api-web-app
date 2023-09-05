@@ -51,7 +51,7 @@ export default function Index() {
   return (
     <div className={styles.container}>
       <div className={styles.loginContainer}>
-        <h1>ChattaAmico</h1>
+        <h1>Conversa</h1>
         <input
           type="text"
           placeholder="Username"
